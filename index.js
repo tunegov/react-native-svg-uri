@@ -99,25 +99,25 @@ class SvgUri extends Component{
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.isComponentMounted = true;
   }
 
-  componentWillReceiveProps (nextProps){
-    if (nextProps.source) {
-      const source = resolveAssetSource(nextProps.source) || {};
-      const oldSource = resolveAssetSource(this.props.source) || {};
+  componentDidUpdate(prevProps) {
+    if (this.props.source) {
+      const source = resolveAssetSource(this.props.source) || {};
+      const oldSource = resolveAssetSource(prevProps.source) || {};
       if(source.uri !== oldSource.uri){
         this.fetchSVGData(source.uri);
       }
     }
 
-    if (nextProps.svgXmlData !== this.props.svgXmlData) {
-      this.setState({ svgXmlData: nextProps.svgXmlData });
+    if (this.props.svgXmlData !== prevProps.svgXmlData) {
+      this.setState({ svgXmlData: this.props.svgXmlData });
     }
 
-    if (nextProps.fill !== this.props.fill) {
-      this.setState({ fill: nextProps.fill });
+    if (this.props.fill !== prevProps.fill) {
+      this.setState({ fill: this.props.fill });
     }
   }
 
