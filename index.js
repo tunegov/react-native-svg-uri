@@ -103,6 +103,17 @@ class SvgUri extends Component{
     this.isComponentMounted = true;
   }
 
+  static getDerivedStateFromProps(props, state) {
+    const newState = {}
+    if (state.svgXmlData !== props.svgXmlData) {
+      newState.svgXmlData = props.svgXmlData
+    }
+    if (state.fill !== props.fill) {
+      newState.fill = props.fill
+    }
+    return newState
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.source) {
       const source = resolveAssetSource(this.props.source) || {};
@@ -112,13 +123,13 @@ class SvgUri extends Component{
       }
     }
 
-    if (this.props.svgXmlData !== prevProps.svgXmlData) {
-      this.setState({ svgXmlData: this.props.svgXmlData });
-    }
+    // if (this.props.svgXmlData !== prevProps.svgXmlData) {
+    //   this.setState({ svgXmlData: this.props.svgXmlData });
+    // }
 
-    if (this.props.fill !== prevProps.fill) {
-      this.setState({ fill: this.props.fill });
-    }
+    // if (this.props.fill !== prevProps.fill) {
+    //   this.setState({ fill: this.props.fill });
+    // }
   }
 
   componentWillUnmount() {
